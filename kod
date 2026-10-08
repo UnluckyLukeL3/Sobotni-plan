@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pytanie</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        overflow: hidden;
+    }
+
+    .box {
+        width: 90%;
+        max-width: 420px;
+        padding: 35px 20px;
+        text-align: center;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+        font-size: 26px;
+        margin-bottom: 35px;
+    }
+
+    button {
+        border: none;
+        border-radius: 12px;
+        padding: 15px 30px;
+        font-size: 18px;
+        cursor: pointer;
+        margin: 8px;
+        transition: 0.15s;
+    }
+
+    #yes {
+        background: #222;
+        color: white;
+    }
+
+    #no {
+        background: #ddd;
+        color: #222;
+        position: fixed;
+    }
+
+    #message {
+        display: none;
+        font-size: 22px;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Czy mogę się napić w sobotę?</h1>
+
+    <button id="yes">TAK</button>
+    <button id="no">NIE</button>
+
+    <div id="message">
+        Dzięki ❤️
+    </div>
+</div>
+
+<script>
+const noButton = document.getElementById("no");
+const yesButton = document.getElementById("yes");
+const message = document.getElementById("message");
+
+function moveButton() {
+    const margin = 15;
+
+    const maxX = window.innerWidth - noButton.offsetWidth - margin;
+    const maxY = window.innerHeight - noButton.offsetHeight - margin;
+
+    const x = Math.max(margin, Math.random() * maxX);
+    const y = Math.max(margin, Math.random() * maxY);
+
+    noButton.style.left = x + "px";
+    noButton.style.top = y + "px";
+}
+
+noButton.addEventListener("mouseenter", moveButton);
+noButton.addEventListener("touchstart", function(e) {
+    e.preventDefault();
+    moveButton();
+});
+
+yesButton.addEventListener("click", function() {
+    document.querySelector("h1").style.display = "none";
+    yesButton.style.display = "none";
+    noButton.style.display = "none";
+    message.style.display = "block";
+});
+
+moveButton();
+</script>
+
+</body>
+</html>
